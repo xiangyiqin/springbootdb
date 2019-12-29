@@ -33,7 +33,7 @@ public class MenuController {
     public JsonResult doDeleteObject(Integer id){
         int parentId=menusService.selectParent(id);
         if(parentId>0){
-            return new JsonResult("删除子类",0);
+            return new JsonResult("删除子类1",0);
         }else {
             int row = menusService.deleteObject(id);
             return new JsonResult("delete OK");
@@ -51,7 +51,7 @@ public class MenuController {
         	if(i>0){
 	return new JsonResult("增加成功");
 }else{
-return new JsonResult("增加失败")；
+return new JsonResult("增加失败");
 }
 
     }
