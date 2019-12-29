@@ -1,4 +1,4 @@
-package com.lala.springbootdb.controller;
+﻿package com.lala.springbootdb.controller;
 
 import com.lala.springbootdb.common.vo.JsonResult;
 import com.lala.springbootdb.common.vo.Node;
@@ -46,8 +46,14 @@ public class MenuController {
     @RequestMapping("doSaveObject")
     @ResponseBody
     public JsonResult doSaveObject(Menus menus){
+        
         int i = menusService.insertObject(menus);
-        return new JsonResult("增加成功");
+        	if(i>0){
+	return new JsonResult("增加成功");
+}else{
+return new JsonResult("增加失败")；
+}
+
     }
     @RequestMapping("doFindZtreeMenuNodes")
     @ResponseBody
