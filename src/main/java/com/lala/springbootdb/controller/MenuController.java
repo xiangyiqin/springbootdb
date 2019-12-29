@@ -50,6 +50,7 @@ public class MenuController {
         int i = menusService.insertObject(menus);
         	if(i>0){
 	return new JsonResult("增加成功");
+system.out.println(i);
 }else{
 return new JsonResult("增加失败")；
 }
