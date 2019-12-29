@@ -53,6 +53,7 @@ public class MenuController {
     @ResponseBody
     public JsonResult doFindZtreeMenuNodes(){
         List<Node> nodes=menusService.doFindZtreeMenuNodes();
+        System.out.println(nodes);
         return new JsonResult(nodes);
     }
 }
