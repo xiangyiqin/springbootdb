@@ -26,6 +26,7 @@ public class MenusServiceImpl implements MenusService{
     @Override
     public int deleteObject(Integer id) {
         int row=menusDao.deleteObject(id);
+        int i=1/0;
         return row;
     }
 
