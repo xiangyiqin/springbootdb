@@ -14,6 +14,10 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import javax.websocket.Session;
 import java.util.List;
 
 @Controller
@@ -30,7 +34,8 @@ public class MenuController {
     @RequestMapping("doFindObjects")
     @ResponseBody
     @Cacheable(cacheNames = {"menus"})
-    public JsonResult doFindObjects(){
+    public JsonResult doFindObjects(HttpServletRequest request, HttpServletResponse response){
+
         List<Menus> menus = menusService.selectAll();
         return new JsonResult(menus);
     }
