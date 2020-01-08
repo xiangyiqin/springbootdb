@@ -1,4 +1,4 @@
-package com.lala.springbootdb.fileter;
+/*package com.lala.springbootdb.fileter;
 
 import javax.servlet.*;
 import javax.servlet.annotation.WebFilter;
@@ -22,4 +22,4 @@ public class LoginFilter implements Filter {
     public void destroy() {
 
     }
-}
+}*/

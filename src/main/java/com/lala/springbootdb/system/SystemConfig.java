@@ -1,6 +1,7 @@
 package com.lala.springbootdb.system;
 
 import com.lala.springbootdb.common.interceptor.JWTinterceptor;
+import com.lala.springbootdb.common.interceptor.JWTinterceptorCookie;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -8,29 +9,22 @@ import org.springframework.util.ResourceUtils;
 import org.springframework.web.servlet.config.annotation.*;
 
 @Configuration
-public class SystemConfig extends WebMvcConfigurationSupport  {
+public class SystemConfig implements WebMvcConfigurer  {
    @Autowired
-    private JWTinterceptor jwTinterceptor;
-
+    private JWTinterceptorCookie jwTinterceptorCookie;
+    /*@Override
+    public void addInterceptors(InterceptorRegistry registry) {
+        *//*registry.addInterceptor(jwTinterceptor).addPathPatterns("/**")
+                .excludePathPatterns("/doLogin").excludePathPatterns("/templates/pages/login.html");*//*
+    }*/
     @Override
-    protected void addInterceptors(InterceptorRegistry registry) {
-        registry.addInterceptor(jwTinterceptor).addPathPatterns("/**").
-                excludePathPatterns("/doLogin").excludePathPatterns("/static/**");
-        super.addInterceptors(registry);
-    }
+    public void addInterceptors(InterceptorRegistry registry) {
+        registry.addInterceptor(jwTinterceptorCookie).addPathPatterns("/**")
+                .excludePathPatterns("/doLogin","/bower_components/**","/build/**","/dist/**","/plugins/**");
 
-    @Override
-    protected void addResourceHandlers(ResourceHandlerRegistry registry) {
-        registry.addResourceHandler("/static/**").addResourceLocations("classpath:/static/");
-        super.addResourceHandlers(registry);
-    }
-
-    @Override
-    protected void configureViewResolvers(ViewResolverRegistry registry) {
-        registry.jsp("/templates/pages/",".html");
-        super.configureViewResolvers(registry);
     }
     /**
+     *
      * 注册添加拦截器
      */
    /* @Override

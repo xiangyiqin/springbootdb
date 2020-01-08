@@ -3,31 +3,35 @@ package com.lala.springbootdb.common.interceptor;
 
 import com.lala.springbootdb.common.util.JWTUtil;
 import io.jsonwebtoken.Claims;
-import io.jsonwebtoken.Jwts;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.util.Date;
 
 @Component
-public class JWTinterceptor extends HandlerInterceptorAdapter {
+public class JWTinterceptorCookie extends HandlerInterceptorAdapter {
     @Autowired
     private JWTUtil jwtUtil;
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
+        String cookieValue=null;
         System.out.println(request.getRequestURI());
-        String authorization = request.getHeader("Authorization");
-        System.out.println("+++++++++++++++");
-        System.out.println(authorization+"lanjieqi+++++++++++++++");
-        if(authorization!=null&&authorization.startsWith("Bearer")){
-            String token = authorization.replace("Bearer ", "");
-            System.out.println(token);
-            Claims claims = jwtUtil.parseJwt(token);
+        Cookie[] cookies = request.getCookies();
+        for(Cookie cookie:cookies){
+            String cookieName=cookie.getName();
+            if(cookieName.equals("token")){
+                cookieValue=cookie.getValue();
+            }
+        }
+
+        if(cookieValue!=null){
+
+            System.out.println(cookieValue+"--------------------");
+            Claims claims = jwtUtil.parseJwt(cookieValue);
             if(claims!=null){
                 request.setAttribute("user_claims",claims);
 
@@ -38,8 +42,8 @@ public class JWTinterceptor extends HandlerInterceptorAdapter {
             return false;
         }}else {
             System.out.println("111111");
-          //  response.sendRedirect(request.getContextPath()+"/doLogin");//拦截后跳转的方法
-            return true;
+            response.sendRedirect(request.getContextPath()+"/doLogin");//拦截后跳转的方法
+            return false;
         }
 
 

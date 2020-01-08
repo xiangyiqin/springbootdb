@@ -32,7 +32,7 @@ public class JWTUtil {
     public void setKey(String key) {
         this.key = key;
     }
-    public String creatJwt(String id, String name, Map<String,Object> map){
+    public String creatJwt(String id, String name){
         long now = System.currentTimeMillis();
         long exp=now+ttl;
         JwtBuilder jwtBuilder = Jwts.builder().setId(id).setIssuedAt(new Date()).setSubject(name).signWith(SignatureAlgorithm.HS256, key);
@@ -41,6 +41,7 @@ public class JWTUtil {
         }*/
         jwtBuilder.setExpiration(new Date(exp));
         String token = jwtBuilder.compact();
+        System.out.println(token+"========================");
 
         return token;
     }

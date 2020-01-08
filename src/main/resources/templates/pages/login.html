@@ -35,13 +35,13 @@
   <div class="login-box-body">
     <p class="login-box-msg">Sign in to start your session</p>
 
-    <form method="post">
+    <form method="post" action="/doLogin">
       <div class="form-group has-feedback">
-        <input type="text" id="usernameId" name="username" class="form-control" placeholder="username">
+        <input type="text" id="username" name="username" class="form-control" placeholder="username">
         <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
       </div>
       <div class="form-group has-feedback">
-        <input type="password" id="passwordId" name="password" class="form-control" placeholder="Password">
+        <input type="password" id="password" name="password" class="form-control" placeholder="Password">
         <span class="glyphicon glyphicon-lock form-control-feedback"></span>
       </div>
      
@@ -56,7 +56,7 @@
         </div>
         <!-- /.col -->
         <div class="col-xs-4">
-          <button type="button" class="btn btn-primary btn-block btn-flat btn-login">Sign In</button>
+          <button type="submit" class="btn btn-primary btn-block btn-flat btn-login">Sign In</button>
         </div>
         <!-- /.col -->
       </div>
@@ -80,8 +80,12 @@
       radioClass: 'iradio_square-blue',
       increaseArea: '20%' // optional
     });
-    $(".btn").click(doLogin);
+ //   $(".btn").click(doLogin);
   });
+  $(function () {
+    $(".login-box-body").on("click",".btn",doLogin);
+  });
+
   function doLogin(){
 	  var params={
 		 username:$("#usernameId").val(),
@@ -90,10 +94,12 @@
 	  }
 	  var url="user/doLogin";
 	  console.log("params",params);
+
 	  $.post(url,params,function(result){
 		  if(result.state==1){
 			//跳转到indexUI对应的页面
 			location.href="doIndexUI?t="+Math.random();
+
 		  }else{
 			$(".login-box-msg").html(result.message); 
 		  }

@@ -7,7 +7,10 @@ import io.jsonwebtoken.SignatureAlgorithm;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.util.DigestUtils;
 
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.Date;
 
 @SpringBootTest
@@ -27,6 +30,13 @@ class SpringbootdbApplicationTests {
         System.out.println(lala.getId());
         System.out.println(lala.getSubject());
         System.out.println(lala.getIssuedAt());
+
+    }
+    @Test
+    public void test2() throws NoSuchAlgorithmException {
+        String a="adasdasd";
+        String s = DigestUtils.md5DigestAsHex(a.getBytes());
+        System.out.println(s);
 
     }
 

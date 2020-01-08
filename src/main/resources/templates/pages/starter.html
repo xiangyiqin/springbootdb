@@ -419,7 +419,13 @@ desired effect
 <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
 <!-- AdminLTE App -->
 <script src="dist/js/adminlte.min.js"></script>
+var a=request.getattribute("token");
+console.log(a);
+var token =  request.getParameter("token");
+console.log(token)
+
 <script type="text/javascript">
+
   $(function(){
 	 //初始化页面用户信息
 	 doInitUserInfo();
