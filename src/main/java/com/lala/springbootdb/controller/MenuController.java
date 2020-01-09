@@ -1,4 +1,4 @@
-﻿package com.lala.springbootdb.controller;
+package com.lala.springbootdb.controller;
 
 import com.lala.springbootdb.common.vo.JsonResult;
 import com.lala.springbootdb.common.vo.Node;
@@ -52,7 +52,7 @@ public class MenuController {
         int i = menusService.insertObject(menus);
         	if(i>0){
 	return new JsonResult("增加成功");
-system.out.println(i);
+
 }else{
 return new JsonResult("增加失败");
 }
