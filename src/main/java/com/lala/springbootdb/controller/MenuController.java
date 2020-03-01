@@ -63,6 +63,7 @@ return new JsonResult("增加失败");
     public JsonResult doFindZtreeMenuNodes(){
         List<Node> nodes=menusService.doFindZtreeMenuNodes();
         System.out.println(nodes);
+        System.out.println("测试git上传");
         return new JsonResult(nodes);
     }
 }
